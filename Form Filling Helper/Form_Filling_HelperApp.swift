@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct Form_Filling_HelperApp: App {
+struct Form_Filling_HelperApp: App {    
     var body: some Scene {
         WindowGroup {
             ContentView()

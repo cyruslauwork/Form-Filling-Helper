@@ -8,9 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var cardViewData = CardViewDataSrc()
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        LazyVStack{
+            RoundedRectangle(cornerRadius: 16.0)
+                .fill(Main.primaryThemeYellow.theme.mainColor)
+            Text("Hello, world!")
+                .padding()
+            
+            ScrollView(.horizontal) {
+                
+            }
+        }
     }
 }
 

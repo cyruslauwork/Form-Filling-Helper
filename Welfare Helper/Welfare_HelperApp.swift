@@ -1,6 +1,6 @@
 //
-//  Form_Filling_HelperApp.swift
-//  Form Filling Helper
+//  Welfare_HelperApp.swift
+//  Welfare Helper
 //
 //  Created by Cyrus on 2/5/2022.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct Form_Filling_HelperApp: App {    
+struct Welfare_HelperApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

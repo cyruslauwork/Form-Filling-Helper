@@ -1,6 +1,6 @@
 //
 //  Theme.swift
-//  Form Filling Helper
+//  Welfare Helper
 //
 //  Created by Cyrus on 2/5/2022.
 //
@@ -22,8 +22,8 @@ struct Main {
 }
 
 extension Main {
-    static let black: Main = Main(theme: .black)
-    static let white: Main = Main(theme: .white)
+    static let primaryThemeBlack: Main = Main(theme: .primaryThemeBlack)
+    static let primaryThemeWhite: Main = Main(theme: .primaryThemeWhite)
     static let primaryThemeRed: Main = Main(theme: .primaryThemeRed)
     static let primaryThemeYellow: Main = Main(theme: .primaryThemeYellow)
     static let primaryThemeBlue: Main = Main(theme: .primaryThemeBlue)
@@ -32,16 +32,16 @@ extension Main {
 enum Theme: String
 //, CaseIterable, Identifiable // themePicker
 {
-    case black
-    case white
+    case primaryThemeBlack
+    case primaryThemeWhite
     case primaryThemeRed
     case primaryThemeYellow
     case primaryThemeBlue
     
     var accentColor: Color {
         switch self {
-        case .primaryThemeRed, .primaryThemeYellow, .white: return .black
-        case .primaryThemeBlue, .black: return .white
+        case .primaryThemeRed, .primaryThemeYellow, .primaryThemeWhite: return .black
+        case .primaryThemeBlue, .primaryThemeBlack: return .white
         }
     }
     var mainColor: Color {

@@ -10,7 +10,19 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var cardViewData = CardViewDataSrc()
     @State private var bookmarksPresented = false
-    @State private var homepageBGColor = Main.primaryThemeWhite.theme.mainColor
+    
+    private let JSONDataFromInternet: [CardViewStruct] = [
+        CardViewStruct(title: "No Data", desc: "No Data", info: "No Data", theURL: "https://www.google.com/maps"),
+        CardViewStruct(title: "No Data", desc: "No Data", info: "No Data", theURL: "https://www.google.com/maps"),
+        CardViewStruct(title: "No Data", desc: "No Data", info: "No Data", theURL: "https://www.google.com/maps"),
+        CardViewStruct(title: "No Data", desc: "No Data", info: "No Data", theURL: "https://www.google.com/maps")
+    ]
+    private let JSONDataFromLocal: [CardViewStruct] = [
+        CardViewStruct(title: "No Data", desc: "No Data", info: "No Data", theURL: "https://www.google.com/maps"),
+        CardViewStruct(title: "No Data", desc: "No Data", info: "No Data", theURL: "https://www.google.com/maps"),
+        CardViewStruct(title: "No Data", desc: "No Data", info: "No Data", theURL: "https://www.google.com/maps"),
+        CardViewStruct(title: "No Data", desc: "No Data", info: "No Data", theURL: "https://www.google.com/maps")
+    ]
     
     var body: some View {
         GeometryReader { metrics in
@@ -21,15 +33,25 @@ struct ContentView: View {
                     if !bookmarksPresented {
                         InputView()
                             .frame(width: metrics.size.width * 1, height: 350, alignment: .center)
+                            .transition(.slide)
                         
-                        CardView(cardViewStruct: CardViewStruct.sampleData)
-                            .frame(width: metrics.size.width * 1, height: .infinity, alignment: .center)
+                        ForEach(JSONDataFromInternet) { data in
+//                            CardView(cardViewStruct: CardViewStruct.sampleData)
+                            CardView(cardViewStruct: data)
+                                .frame(width: metrics.size.width * 1, height: .infinity, alignment: .center)
+                                .transition(.slide)
+                        }
                     } else {
-                        
+                        ForEach(JSONDataFromInternet) { data in
+//                            CardView(cardViewStruct: CardViewStruct.sampleData)
+                            CardView(cardViewStruct: data)
+                                .frame(width: metrics.size.width * 1, height: .infinity, alignment: .center)
+                                .transition(.slide)
+                        }
                     }
                 }
                 .frame(width: metrics.size.width * 1, height: metrics.size.height * 1, alignment: .center)
-                .background(homepageBGColor)
+                .background(bookmarksPresented ? Main.primaryThemeRed.theme.mainColor : Main.primaryThemeWhite.theme.mainColor)
             }
         }
     }
@@ -40,12 +62,12 @@ struct ContentView: View {
                 Spacer()
                 
                 Button(action: {
-                    withAnimation(.easeInOut) { bookmarksPresented.toggle() }
+                    withAnimation(.easeInOut) { bookmarksPresented.toggle() } // To enable animation
                 }) {
-                    Image("bookmarks_FILL0_wght400_GRAD0_opsz48")
+                    Image(bookmarksPresented ? "home_FILL0_wght400_GRAD0_opsz48" : "bookmarks_FILL0_wght400_GRAD0_opsz48")
                         .resizable()
                         .renderingMode(.template)
-                        .foregroundColor(Main.primaryThemeRed.theme.mainColor)
+                        .foregroundColor(bookmarksPresented ? Main.primaryThemeRed.theme.accentColor : Main.primaryThemeRed.theme.mainColor)
                         .frame(width: 75.0, height: 75.0)
                 }
             }
@@ -53,6 +75,7 @@ struct ContentView: View {
             if !bookmarksPresented {
                 Text("Welcome to \nWelfare Helper!")
                     .font(.largeTitle.weight(.bold))
+                    .transition(.slide)
             }
         }
         .padding()

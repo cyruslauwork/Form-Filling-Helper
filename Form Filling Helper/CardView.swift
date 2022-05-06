@@ -8,34 +8,53 @@
 import SwiftUI
 
 struct CardView: View {
+    @State private var isExpanded: Bool = false
+    
     var cardViewStruct: CardViewStruct
     
     var body: some View {
+        content
+    }
+    
+    private var content: some View {
         VStack(alignment: .leading) {
+            header
+            Spacer()
+            
+            if isExpanded {
+                Text(cardViewStruct.title)
+                    .font(.headline)
+                    .accessibilityLabel("\(cardViewStruct.title)")
+                Spacer()
+                
+                Link(cardViewStruct.info, destination: URL(string: cardViewStruct.theURL)!)
+                    .font(.headline.weight(.bold))
+                    .accessibilityLabel("\(cardViewStruct.info)")
+            }
+        }
+        .padding()
+        .foregroundColor(Main.primaryThemeBlue.theme.accentColor)
+        .background(RoundedRectangle(cornerRadius: 16.0)
+            .fill(Main.primaryThemeBlue.theme.mainColor)
+            .shadow(radius: 3)
+        )
+        .padding()
+    }
+    
+    private var header: some View {
+        HStack {
             Text(cardViewStruct.title)
-                .font(.title.weight(.bold))
+                .font(.title2.weight(.bold))
                 .accessibilityAddTraits(.isHeader)
             Spacer()
             
-            Text(cardViewStruct.title)
-                .font(.headline)
-                .accessibilityLabel("\(cardViewStruct.title)")
-            Spacer()
-            
-            Link(cardViewStruct.info, destination: URL(string: "https://www.google.com/maps")!)
-                .font(.headline.weight(.bold))
-                .accessibilityLabel("\(cardViewStruct.info)")
+            Image("expand_more_FILL0_wght400_GRAD0_opsz48")
+                .renderingMode(.template)
+                .foregroundColor(Main.primaryThemeBlue.theme.accentColor)
         }
-        .frame(
-              minWidth: 0,
-              maxWidth: .infinity,
-              minHeight: 0,
-              maxHeight: .infinity,
-              alignment: .topLeading
-            )
-        .padding()
-        .foregroundColor(Main.primaryThemeBlue.theme.accentColor)
-        .background(Main.primaryThemeBlue.theme.mainColor)
+        .onTapGesture {
+            withAnimation { isExpanded.toggle() }
+        }
     }
 }
 
@@ -44,6 +63,6 @@ struct CardView_Previews: PreviewProvider {
     
     static var previews: some View {
         CardView(cardViewStruct: cardViewStruct)
-            .previewLayout(.fixed(width: 400, height: 75))
+            .previewLayout(.fixed(width: 400, height: 400))
     }
 }

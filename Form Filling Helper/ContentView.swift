@@ -11,14 +11,16 @@ struct ContentView: View {
     @StateObject private var cardViewData = CardViewDataSrc()
     
     var body: some View {
-        LazyVStack{
-            RoundedRectangle(cornerRadius: 16.0)
-                .fill(Main.primaryThemeYellow.theme.mainColor)
-            Text("Hello, world!")
-                .padding()
-            
-            ScrollView(.horizontal) {
+        GeometryReader { metrics in
+            LazyVStack{
+                ScrollView(.vertical) {
+                    InputView()
+                        .frame(width: metrics.size.width * 1, height: 350, alignment: .center)
                 
+                    CardView(cardViewStruct: CardViewStruct.sampleData)
+                        .frame(width: metrics.size.width * 1, height: .infinity, alignment: .center)
+                }
+                .frame(width: metrics.size.width * 1, height: metrics.size.height * 1, alignment: .center)
             }
         }
     }

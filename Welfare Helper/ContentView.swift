@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var cardViewData = CardViewDataSrc()
-    @State private var bookmarksPresented = false
+    @State private var bookmarksPresented: Bool = false
     
     private let JSONDataFromInternet: [CardViewStruct] = [
         CardViewStruct(title: "No Data", desc: "No Data", info: "No Data", theURL: "https://www.google.com/maps"),
@@ -32,20 +32,18 @@ struct ContentView: View {
                     
                     if !bookmarksPresented {
                         InputView()
-                            .frame(width: metrics.size.width * 1, height: 350, alignment: .center)
+                            .frame(height: 350)
                             .transition(.slide)
                         
                         ForEach(JSONDataFromInternet) { data in
 //                            CardView(cardViewStruct: CardViewStruct.sampleData)
-                            CardView(cardViewStruct: data)
-                                .frame(width: metrics.size.width * 1, height: .infinity, alignment: .center)
+                            CardView(cardViewStruct: data, isBookmarked: CardViewBookmarked(bookmarked: false))
                                 .transition(.slide)
                         }
                     } else {
-                        ForEach(JSONDataFromInternet) { data in
+                        ForEach(JSONDataFromLocal) { data in
 //                            CardView(cardViewStruct: CardViewStruct.sampleData)
-                            CardView(cardViewStruct: data)
-                                .frame(width: metrics.size.width * 1, height: .infinity, alignment: .center)
+                            CardView(cardViewStruct: data, isBookmarked: CardViewBookmarked(bookmarked: true))
                                 .transition(.slide)
                         }
                     }

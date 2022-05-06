@@ -12,9 +12,12 @@ struct InputView: View {
     @StateObject var speechRecognizer = SpeechRecognizer() // speechRecognizer
     @State private var isRecording = false // speechRecognizer 4
     
+    @State var Transcription: String = "Briefly introduce yourself and see the welfares that suit you"
+    let timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect() // Timer
+    
     var body: some View {
         VStack {
-            Text(speechRecognizer.transcript)
+            Text(Transcription)
                 .font(.headline)
                 .frame(
                     minWidth: 0,
@@ -25,19 +28,29 @@ struct InputView: View {
                 )
                 .foregroundColor(Main.primaryThemeYellow.theme.accentColor)
                 .padding()
+                // Timer 2
+                .onReceive(timer) { time in
+                    // Make transcriptions update automatically.
+                    // This is because "speechRecognizer.transcript" requires frame updates
+                    // (e.g button events/ timer events) to trigger the update itself.
+                    if isRecording {
+                        DispatchQueue.main.async {
+                            Transcription = speechRecognizer.transcript
+                        }
+                    }
+                }
+                // Timer 2 end
             
             Button(action: {
                 withAnimation(.easeInOut) { isRecording.toggle() }
                 
                 if !isRecording {
                     speechRecognizer.stopTranscribing() // speechRecognizer 3
-                    isRecording = false // speechRecognizer 4
                 } else {
                     // speechRecognizer 2
                     speechRecognizer.reset()
                     speechRecognizer.transcribe()
                     // speechRecognizer 2 end
-                    isRecording = true // speechRecognizer 4
                 }
             }) {
                 Image(isRecording ? "restart_alt_FILL0_wght400_GRAD0_opsz48" : "mic_FILL0_wght400_GRAD0_opsz48")

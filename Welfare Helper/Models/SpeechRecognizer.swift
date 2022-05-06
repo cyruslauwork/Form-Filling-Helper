@@ -10,7 +10,6 @@
 import Foundation
 import AVFoundation
 import Speech
-import SwiftUI
 
 class SpeechRecognizer: ObservableObject {
     
@@ -39,7 +38,7 @@ class SpeechRecognizer: ObservableObject {
     private var recognizer: SFSpeechRecognizer?
     
     init() {
-        recognizer = SFSpeechRecognizer()
+        recognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
         
         Task(priority: .background) {
             do {

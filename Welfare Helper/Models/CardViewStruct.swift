@@ -21,7 +21,6 @@ struct CardViewStruct: Identifiable, Codable {
         self.info = info
         self.theURL = theURL
     }
-    
 }
 
 extension CardViewStruct {

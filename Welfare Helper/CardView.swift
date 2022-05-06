@@ -11,7 +11,8 @@ struct CardView: View {
     @State private var isExpanded: Bool = false
     
     var cardViewStruct: CardViewStruct
-    
+    @State var isBookmarked: CardViewBookmarked
+        
     var body: some View {
         content
     }
@@ -30,6 +31,18 @@ struct CardView: View {
                 Link(cardViewStruct.info, destination: URL(string: cardViewStruct.theURL)!)
                     .font(.headline.weight(.bold))
                     .accessibilityLabel("\(cardViewStruct.info)")
+                
+                HStack {
+                    Spacer()
+                    
+                    Button(action: {
+                        isBookmarked.bookmarked.toggle()
+                    }) {
+                        Image(isBookmarked.bookmarked ? "bookmark_remove_FILL0_wght400_GRAD0_opsz48" : "bookmark_add_FILL0_wght400_GRAD0_opsz48")
+                            .renderingMode(.template)
+                            .foregroundColor(Main.primaryThemeBlue.theme.accentColor)
+                    }
+                }
             }
         }
         .padding()
@@ -58,11 +71,19 @@ struct CardView: View {
     }
 }
 
+struct CardViewBookmarked {
+    var bookmarked: Bool
+    
+    init(bookmarked: Bool) {
+        self.bookmarked = bookmarked
+    }
+}
+
 struct CardView_Previews: PreviewProvider {
     static var cardViewStruct = CardViewStruct.sampleData
     
     static var previews: some View {
-        CardView(cardViewStruct: cardViewStruct)
+        CardView(cardViewStruct: cardViewStruct, isBookmarked: CardViewBookmarked(bookmarked: false))
             .previewLayout(.fixed(width: 400, height: 400))
     }
 }

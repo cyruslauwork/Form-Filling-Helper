@@ -51,11 +51,11 @@ enum Theme: String
         rawValue.capitalized
     }
     
-    // themePicker 2
-    //    var id: String {
-    //        name
-    //    }
-    // themePicker 2 end
+      // themePicker 2
+//        var id: String {
+//            name
+//        }
+      // themePicker 2 end
     
 }
 
@@ -87,7 +87,7 @@ enum Theme: String
 //
 //struct ThemeView: View {
 //    let theme: Theme
-//    
+//
 //    var body: some View {
 //        ZStack {
 //            RoundedRectangle(cornerRadius: 4)
@@ -108,6 +108,6 @@ enum Theme: String
 //}
 // themePicker 4 end
 
-//How to use themePicker:
-//@State var selection: Theme
-//ThemePicker(selection: $data.theme)
+// How to use themePicker:
+// @State var selection: Theme
+// ThemePicker(selection: $data.theme)

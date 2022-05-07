@@ -11,7 +11,7 @@ struct CardView: View {
     @State private var isExpanded: Bool = false
     
     var cardViewStruct: CardViewStruct
-    @State var isBookmarked: CardViewBookmarked
+    @State var isBookmarksPage: CardViewBookmarks
         
     var body: some View {
         content
@@ -23,9 +23,9 @@ struct CardView: View {
             Spacer()
             
             if isExpanded {
-                Text(cardViewStruct.title)
+                Text(cardViewStruct.desc)
                     .font(.headline)
-                    .accessibilityLabel("\(cardViewStruct.title)")
+                    .accessibilityLabel("\(cardViewStruct.desc)")
                 Spacer()
                 
                 Link(cardViewStruct.info, destination: URL(string: cardViewStruct.theURL)!)
@@ -36,9 +36,9 @@ struct CardView: View {
                     Spacer()
                     
                     Button(action: {
-                        isBookmarked.bookmarked.toggle()
+                        isBookmarksPage.bookmarksPage.toggle()
                     }) {
-                        Image(isBookmarked.bookmarked ? "bookmark_remove_FILL0_wght400_GRAD0_opsz48" : "bookmark_add_FILL0_wght400_GRAD0_opsz48")
+                        Image(isBookmarksPage.bookmarksPage ? "bookmark_remove_FILL0_wght400_GRAD0_opsz48" : "bookmark_add_FILL0_wght400_GRAD0_opsz48")
                             .renderingMode(.template)
                             .foregroundColor(Main.primaryThemeBlue.theme.accentColor)
                     }
@@ -71,11 +71,11 @@ struct CardView: View {
     }
 }
 
-struct CardViewBookmarked {
-    var bookmarked: Bool
+struct CardViewBookmarks {
+    var bookmarksPage: Bool
     
-    init(bookmarked: Bool) {
-        self.bookmarked = bookmarked
+    init(bookmarksPage: Bool) {
+        self.bookmarksPage = bookmarksPage
     }
 }
 
@@ -83,7 +83,7 @@ struct CardView_Previews: PreviewProvider {
     static var cardViewStruct = CardViewStruct.sampleData
     
     static var previews: some View {
-        CardView(cardViewStruct: cardViewStruct, isBookmarked: CardViewBookmarked(bookmarked: false))
+        CardView(cardViewStruct: cardViewStruct, isBookmarksPage: CardViewBookmarks(bookmarksPage: false))
             .previewLayout(.fixed(width: 400, height: 400))
     }
 }

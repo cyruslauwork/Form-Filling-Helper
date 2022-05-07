@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var cardViewData = CardViewDataSrc()
     @State private var bookmarksPresented: Bool = false
     
     private let JSONDataFromInternet: [CardViewStruct] = [
@@ -37,14 +36,35 @@ struct ContentView: View {
                         
                         ForEach(JSONDataFromInternet) { data in
 //                            CardView(cardViewStruct: CardViewStruct.sampleData)
-                            CardView(cardViewStruct: data, isBookmarked: CardViewBookmarked(bookmarked: false))
+                            CardView(cardViewStruct: data, isBookmarksPage: CardViewBookmarks(bookmarksPage: false))
                                 .transition(.slide)
+                        }.onAppear(){
+                            // JSON 3
+                            // URL Method
+                            let urlString = "https://github.com/cyruslauwork/Welfare-Helper/tree/main/Welfare%20Helper/JSON/data.json"
+                            
+                            self.loadJson(fromURLString: urlString) { (result) in
+                                switch result {
+                                case .success(let data):
+                                    self.parse(jsonData: data)
+                                case .failure(let error):
+                                    print(error)
+                                }
+                            }
+                            // JSON 3 end
                         }
                     } else {
                         ForEach(JSONDataFromLocal) { data in
 //                            CardView(cardViewStruct: CardViewStruct.sampleData)
-                            CardView(cardViewStruct: data, isBookmarked: CardViewBookmarked(bookmarked: true))
+                            CardView(cardViewStruct: data, isBookmarksPage: CardViewBookmarks(bookmarksPage: true))
                                 .transition(.slide)
+                        }.onAppear(){
+                            // JSON 3
+                            // Local Method
+                            if let localData = self.readLocalFile(forName: "data") {
+                                self.parse(jsonData: localData)
+                            }
+                            // JSON 3 end
                         }
                     }
                 }
@@ -72,13 +92,55 @@ struct ContentView: View {
             
             if !bookmarksPresented {
                 Text("Welcome to \nWelfare Helper!")
-                    .font(.largeTitle.weight(.bold))
+                    .font(.system(size: 45, weight: .bold, design: .default))
                     .transition(.slide)
             }
         }
         .padding()
         .foregroundColor(Main.primaryThemeRed.theme.accentColor)
     }
+    
+    // JSON
+    private func readLocalFile(forName name: String) -> Data? { // Local Method
+        do {
+            if let bundlePath = Bundle.main.path(forResource: name,
+                                                 ofType: "json"),
+                let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8) {
+                return jsonData
+            }
+        } catch {
+            print(error)
+        }
+        
+        return nil
+    }
+    private func loadJson(fromURLString urlString: String,
+                          completion: @escaping (Result<Data, Error>) -> Void) { // URL Method
+        if let url = URL(string: urlString) {
+            let urlSession = URLSession(configuration: .default).dataTask(with: url) { (data, response, error) in
+                if let error = error {
+                    completion(.failure(error))
+                }
+                
+                if let data = data {
+                    completion(.success(data))
+                }
+            }
+            
+            urlSession.resume()
+        }
+    }
+    // JSON end
+    // JSON 2
+    private func parse(jsonData: Data) {
+        do {
+            let decodedData = try JSONDecoder().decode(CardViewStruct.self,
+                                                       from: jsonData)
+        } catch {
+            print("decode error")
+        }
+    }
+    // JSON 2 end
 }
 
 struct ContentView_Previews: PreviewProvider {

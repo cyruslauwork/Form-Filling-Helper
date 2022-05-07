@@ -10,7 +10,8 @@ import AVFoundation // speechRecognizer
 
 struct InputView: View {
     @StateObject var speechRecognizer = SpeechRecognizer() // speechRecognizer
-    @State private var isRecording = false // speechRecognizer 4
+    @State var isRecording: Bool = false // speechRecognizer 4
+    @StateObject var main = Main()
     
     @State var Transcription: String = "Briefly introduce yourself and see the welfares that suit you"
     let timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect() // Timer
@@ -26,17 +27,13 @@ struct InputView: View {
                     maxHeight: .infinity,
                     alignment: .center
                 )
-                .foregroundColor(Main.primaryThemeYellow.theme.accentColor)
+                .foregroundColor(ColorPalette.primaryThemeYellow.theme.accentColor)
                 .padding()
                 // Timer 2
                 .onReceive(timer) { time in
-                    // Make transcriptions update automatically.
-                    // This is because "speechRecognizer.transcript" requires frame updates
-                    // (e.g button events/ timer events) to trigger the update itself.
+                    // Make View update automatically
                     if isRecording {
-                        DispatchQueue.main.async {
-                            Transcription = speechRecognizer.transcript
-                        }
+                        Transcription = speechRecognizer.transcript
                     }
                 }
                 // Timer 2 end
@@ -51,19 +48,20 @@ struct InputView: View {
                     speechRecognizer.reset()
                     speechRecognizer.transcribe()
                     // speechRecognizer 2 end
+                    main.recordingTimes += 1
                 }
             }) {
                 Image(isRecording ? "restart_alt_FILL0_wght400_GRAD0_opsz48" : "mic_FILL0_wght400_GRAD0_opsz48")
                     .resizable()
                     .renderingMode(.template)
-                    .foregroundColor(Main.primaryThemeYellow.theme.accentColor)
+                    .foregroundColor(ColorPalette.primaryThemeYellow.theme.accentColor)
                     .frame(width: 75.0, height: 75.0)
                     .padding()
                     .accessibilityLabel(isRecording ? "with transcription" : "without transcription")
             }
         }
         .background(RoundedRectangle(cornerRadius: 16.0)
-            .fill(Main.primaryThemeYellow.theme.mainColor)
+            .fill(ColorPalette.primaryThemeYellow.theme.mainColor)
             .shadow(radius: 3)
         )
         .padding()

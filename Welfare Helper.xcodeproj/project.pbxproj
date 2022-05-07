@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E21924E2826E41000B9A5AF /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E21924D2826E41000B9A5AF /* Main.swift */; };
 		6E52D4B1282617EA00C2BB9A /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E52D4B0282617EA00C2BB9A /* data.json */; };
 		6E88F0B1281FE21700677B47 /* Welfare_HelperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E88F0B0281FE21700677B47 /* Welfare_HelperApp.swift */; };
 		6E88F0B3281FE21700677B47 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E88F0B2281FE21700677B47 /* ContentView.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E21924D2826E41000B9A5AF /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		6E52D4B0282617EA00C2BB9A /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		6E88F0AD281FE21700677B47 /* Welfare Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Welfare Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E88F0B0281FE21700677B47 /* Welfare_HelperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welfare_HelperApp.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				6E88F0BF28226F0100677B47 /* Theme.swift */,
 				6ECEAE962822D4830004431A /* CardViewStruct.swift */,
 				6ECEAE9C28254FAB0004431A /* SpeechRecognizer.swift */,
+				6E21924D2826E41000B9A5AF /* Main.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -174,6 +177,7 @@
 			files = (
 				6ECEAE972822D4830004431A /* CardViewStruct.swift in Sources */,
 				6ECEAE9D28254FAB0004431A /* SpeechRecognizer.swift in Sources */,
+				6E21924E2826E41000B9A5AF /* Main.swift in Sources */,
 				6ECEAE992824F2FC0004431A /* InputView.swift in Sources */,
 				6E88F0C028226F0100677B47 /* Theme.swift in Sources */,
 				6E88F0B3281FE21700677B47 /* ContentView.swift in Sources */,

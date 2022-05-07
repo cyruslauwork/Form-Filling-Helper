@@ -12,7 +12,7 @@ import SwiftUI
 
 
 
-struct Main {
+struct ColorPalette {
     var theme: Theme
     
     init(theme: Theme) {
@@ -21,12 +21,12 @@ struct Main {
     
 }
 
-extension Main {
-    static let primaryThemeBlack: Main = Main(theme: .primaryThemeBlack)
-    static let primaryThemeWhite: Main = Main(theme: .primaryThemeWhite)
-    static let primaryThemeRed: Main = Main(theme: .primaryThemeRed)
-    static let primaryThemeYellow: Main = Main(theme: .primaryThemeYellow)
-    static let primaryThemeBlue: Main = Main(theme: .primaryThemeBlue)
+extension ColorPalette {
+    static let primaryThemeBlack: ColorPalette = ColorPalette(theme: .primaryThemeBlack)
+    static let primaryThemeWhite: ColorPalette = ColorPalette(theme: .primaryThemeWhite)
+    static let primaryThemeRed: ColorPalette = ColorPalette(theme: .primaryThemeRed)
+    static let primaryThemeYellow: ColorPalette = ColorPalette(theme: .primaryThemeYellow)
+    static let primaryThemeBlue: ColorPalette = ColorPalette(theme: .primaryThemeBlue)
 }
 
 enum Theme: String

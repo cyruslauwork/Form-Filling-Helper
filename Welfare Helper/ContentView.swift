@@ -9,6 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var bookmarksPresented: Bool = false
+    @StateObject var main = Main()
+    @State var recordingTimes: Int = 0
+    
+    let timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect() // Timer
     
     private let JSONDataFromInternet: [CardViewStruct] = [
         CardViewStruct(title: "No Data", desc: "No Data", info: "No Data", theURL: "https://www.google.com/maps"),
@@ -69,9 +73,15 @@ struct ContentView: View {
                     }
                 }
                 .frame(width: metrics.size.width * 1, height: metrics.size.height * 1, alignment: .center)
-                .background(bookmarksPresented ? Main.primaryThemeRed.theme.mainColor : Main.primaryThemeWhite.theme.mainColor)
+                .background(bookmarksPresented ? ColorPalette.primaryThemeRed.theme.mainColor : ColorPalette.primaryThemeWhite.theme.mainColor)
             }
         }
+        // Timer 2
+        .onReceive(timer) { time in
+            // Make View update automatically
+            recordingTimes = main.recordingTimes
+        }
+        // Timer 2 end
     }
     
     private var header: some View {
@@ -85,19 +95,21 @@ struct ContentView: View {
                     Image(bookmarksPresented ? "home_FILL0_wght400_GRAD0_opsz48" : "bookmarks_FILL0_wght400_GRAD0_opsz48")
                         .resizable()
                         .renderingMode(.template)
-                        .foregroundColor(bookmarksPresented ? Main.primaryThemeRed.theme.accentColor : Main.primaryThemeRed.theme.mainColor)
+                        .foregroundColor(bookmarksPresented ? ColorPalette.primaryThemeRed.theme.accentColor : ColorPalette.primaryThemeRed.theme.mainColor)
                         .frame(width: 75.0, height: 75.0)
                 }
             }
             
-            if !bookmarksPresented {
-                Text("Welcome to \nWelfare Helper!")
-                    .font(.system(size: 45, weight: .bold, design: .default))
-                    .transition(.slide)
+            if recordingTimes == 0 {
+                if !bookmarksPresented {
+                    Text("Welcome to \nWelfare Helper!")
+                        .font(.system(size: 45, weight: .bold, design: .default))
+                        .transition(.slide)
+                }
             }
         }
         .padding()
-        .foregroundColor(Main.primaryThemeRed.theme.accentColor)
+        .foregroundColor(ColorPalette.primaryThemeRed.theme.accentColor)
     }
     
     // JSON

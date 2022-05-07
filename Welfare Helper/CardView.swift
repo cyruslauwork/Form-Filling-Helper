@@ -40,15 +40,15 @@ struct CardView: View {
                     }) {
                         Image(isBookmarksPage.bookmarksPage ? "bookmark_remove_FILL0_wght400_GRAD0_opsz48" : "bookmark_add_FILL0_wght400_GRAD0_opsz48")
                             .renderingMode(.template)
-                            .foregroundColor(Main.primaryThemeBlue.theme.accentColor)
+                            .foregroundColor(ColorPalette.primaryThemeBlue.theme.accentColor)
                     }
                 }
             }
         }
         .padding()
-        .foregroundColor(Main.primaryThemeBlue.theme.accentColor)
+        .foregroundColor(ColorPalette.primaryThemeBlue.theme.accentColor)
         .background(RoundedRectangle(cornerRadius: 16.0)
-            .fill(Main.primaryThemeBlue.theme.mainColor)
+            .fill(ColorPalette.primaryThemeBlue.theme.mainColor)
             .shadow(radius: 3)
         )
         .padding()
@@ -63,7 +63,7 @@ struct CardView: View {
             
             Image("expand_more_FILL0_wght400_GRAD0_opsz48")
                 .renderingMode(.template)
-                .foregroundColor(Main.primaryThemeBlue.theme.accentColor)
+                .foregroundColor(ColorPalette.primaryThemeBlue.theme.accentColor)
         }
         .onTapGesture {
             withAnimation { isExpanded.toggle() }

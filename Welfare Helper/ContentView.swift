@@ -14,6 +14,8 @@ struct ContentView: View {
     @State private var JSONDataFromInternet: [CardViewStruct] = [CardViewStruct]()
     @State private var JSONDataFromLocal: [CardViewStruct] = [CardViewStruct]()
     
+    @StateObject var speechRecognizer = SpeechRecognizer()
+    
     var body: some View {
         GeometryReader { metrics in
             LazyVStack{
@@ -44,10 +46,13 @@ struct ContentView: View {
                                                                         
                         ForEach(JSONDataFromInternet, id: \.self) { data in
 //                            CardView(cardViewStruct: CardViewStruct.sampleData)
-                            ForEach([data.conditions]) { el in // Each "el" is an array element
+
+                            ForEach(data.conditions, id: \.self) { el in
                                 // "data.conditions" conform to "CardViewStruct.conditions",
-                                // and surround it with [] as it is of type Array
-                                if data.conditions.range(of: "\(el)", options: .caseInsensitive) != nil { // Matching
+                                // and the "data.conditions" array is now parsed.
+
+//                                if ARRAY.contains(where: {$0.caseInsensitiveCompare(el) == .orderedSame}) { // Matching from an Array
+                                if speechRecognizer.transcript.range(of: el, options: .caseInsensitive) != nil { // Matching from a String
                                     CardView(cardViewStruct: data, isBookmarksPage: CardViewBookmarks(bookmarksPage: false))
                                         .transition(.slide)
                                 }
@@ -65,14 +70,9 @@ struct ContentView: View {
                         
                         ForEach(JSONDataFromLocal, id: \.self) { data in
 //                            CardView(cardViewStruct: CardViewStruct.sampleData)
-                            ForEach([data.conditions]) { el in
-                                // "data.conditions" conform to "CardViewStruct.conditions",
-                                // and surround it with [] as it is of type Array
-                                if data.conditions.range(of: "\(el)", options: .caseInsensitive) != nil { // Matching
-                                    CardView(cardViewStruct: data, isBookmarksPage: CardViewBookmarks(bookmarksPage: true))
-                                        .transition(.slide)
-                                }
-                            }
+
+                            CardView(cardViewStruct: data, isBookmarksPage: CardViewBookmarks(bookmarksPage: true))
+                                .transition(.slide)
                         }
                     }
                 }

@@ -39,6 +39,18 @@ struct CardView: View {
                     
                     Button(action: {
                         isBookmarksPage.bookmarksPage.toggle()
+                        
+                        if var Array = UserDefaults.standard.array(forKey: "bookmarksArray") {
+                            
+                            if !Array.contains(where: { $0 as! Int == cardViewStruct.id }) {
+                                // Add a new element to the end of an Array.
+                                Array.append(cardViewStruct.id)
+                                
+                                UserDefaults.standard.set(Array, forKey: "bookmarksArray") // Reset array object
+                            }
+                        } else {
+                            UserDefaults.standard.set([cardViewStruct.id], forKey: "bookmarksArray") // Set array object
+                        }
                     }) {
                         Image(isBookmarksPage.bookmarksPage ? "bookmark_remove_FILL0_wght400_GRAD0_opsz48" : "bookmark_add_FILL0_wght400_GRAD0_opsz48")
                             .renderingMode(.template)

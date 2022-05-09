@@ -13,12 +13,12 @@ struct InputView: View {
     @State var isRecording: Bool = false // speechRecognizer 4
     @StateObject var main: Main // temporaryStorage_ObservableObject 5
     
-    @State var Transcription: String = "Briefly introduce yourself and see the welfares that suit you"
+    @State var Transcription: String = "Briefly introduce yourself and see the welfares that suit you" // speechRecognizer 4
     let timer = Timer.publish(every: 0.25, on: .main, in: .common).autoconnect() // Timer
     
     var body: some View {
         VStack {
-            Text(Transcription)
+            Text(Transcription) // speechRecognizer 6
                 .font(.headline)
                 .frame(
                     minWidth: 0,
@@ -33,7 +33,7 @@ struct InputView: View {
                 .onReceive(timer) { time in
                     // Make View update automatically
                     if isRecording {
-                        Transcription = speechRecognizer.transcript
+                        Transcription = speechRecognizer.transcript // speechRecognizer 5
                     }
                 }
                 // Timer 2 end

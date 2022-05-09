@@ -136,8 +136,12 @@ struct ContentView: View {
     private func parse(jsonData: Data) {
         do {
             let decodedData = try JSONDecoder().decode(CardViewStructs.self, from: jsonData)
+            
             JSONDataFromInternet = decodedData.Welfares
             JSONDataFromLocal = decodedData.Welfares
+            
+            print(JSONDataFromInternet)
+            print(JSONDataFromLocal)
         } catch {
             print("decode error")
         }

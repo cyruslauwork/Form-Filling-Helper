@@ -79,11 +79,11 @@ struct CardViewBookmarks {
     }
 }
 
-struct CardView_Previews: PreviewProvider {
-    static var cardViewStruct = CardViewStruct.sampleData
-    
-    static var previews: some View {
-        CardView(cardViewStruct: cardViewStruct, isBookmarksPage: CardViewBookmarks(bookmarksPage: false))
-            .previewLayout(.fixed(width: 400, height: 400))
-    }
-}
+//struct CardView_Previews: PreviewProvider {
+//    static var cardViewStruct = CardViewStruct.sampleData
+//
+//    static var previews: some View {
+//        CardView(cardViewStruct: cardViewStruct, isBookmarksPage: CardViewBookmarks(bookmarksPage: false))
+//            .previewLayout(.fixed(width: 400, height: 400))
+//    }
+//}

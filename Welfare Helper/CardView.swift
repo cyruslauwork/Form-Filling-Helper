@@ -27,11 +27,13 @@ struct CardView: View {
                     .font(.headline)
                     .accessibilityLabel("\(cardViewStruct.desc)")
                 Spacer()
+                    .padding(.top)
                 
                 Link(cardViewStruct.info, destination: URL(string: cardViewStruct.theURL)!)
                     .font(.headline.weight(.bold))
                     .accessibilityLabel("\(cardViewStruct.info)")
-                
+                Spacer()
+
                 HStack {
                     Spacer()
                     

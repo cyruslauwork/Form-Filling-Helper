@@ -26,11 +26,11 @@ struct ContentView: View {
                         )
                         .frame(height: 350)
                         .transition(.slide)
-                        .onAppear(){
+                        
+                        HStack{}.onAppear(){
                             // JSON 3
                             // URL Method
                             let urlString = "https://raw.githubusercontent.com/cyruslauwork/Welfare-Helper/main/Welfare%20Helper/JSON/data.json"
-                            
                             self.loadJson(fromURLString: urlString) { (result) in
                                 switch result {
                                 case .success(let data):
@@ -41,17 +41,20 @@ struct ContentView: View {
                             }
                             // JSON 3 end
                         }
-                                                
-                        ForEach(JSONDataFromInternet) { data in
+                                                                        
+                        ForEach(JSONDataFromInternet, id: \.self) { data in
 //                            CardView(cardViewStruct: CardViewStruct.sampleData)
-                            CardView(cardViewStruct: data, isBookmarksPage: CardViewBookmarks(bookmarksPage: false))
-                                .transition(.slide)
+                            ForEach([data.conditions]) { el in // Each "el" is an array element
+                                // "data.conditions" conform to "CardViewStruct.conditions",
+                                // and surround it with [] as it is of type Array
+                                if data.conditions.range(of: "\(el)", options: .caseInsensitive) != nil { // Matching
+                                    CardView(cardViewStruct: data, isBookmarksPage: CardViewBookmarks(bookmarksPage: false))
+                                        .transition(.slide)
+                                }
+                            }
                         }
                     } else {
-                        HStack{
-                            // ...
-                        }
-                        .onAppear(){
+                        HStack{}.onAppear(){
                             // JSON 3
                             // Local Method
                             if let localData = self.readLocalFile(forName: "data") {
@@ -60,10 +63,16 @@ struct ContentView: View {
                             // JSON 3 end
                         }
                         
-                        ForEach(JSONDataFromLocal) { data in
+                        ForEach(JSONDataFromLocal, id: \.self) { data in
 //                            CardView(cardViewStruct: CardViewStruct.sampleData)
-                            CardView(cardViewStruct: data, isBookmarksPage: CardViewBookmarks(bookmarksPage: true))
-                                .transition(.slide)
+                            ForEach([data.conditions]) { el in
+                                // "data.conditions" conform to "CardViewStruct.conditions",
+                                // and surround it with [] as it is of type Array
+                                if data.conditions.range(of: "\(el)", options: .caseInsensitive) != nil { // Matching
+                                    CardView(cardViewStruct: data, isBookmarksPage: CardViewBookmarks(bookmarksPage: true))
+                                        .transition(.slide)
+                                }
+                            }
                         }
                     }
                 }

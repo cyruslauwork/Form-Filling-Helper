@@ -39,6 +39,8 @@ class SpeechRecognizer: ObservableObject {
     
     init() {
         recognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
+//        print(SFSpeechRecognizer.supportedLocales())
+//        [es-419 (fixed), th-TH (fixed), ca-ES (fixed), fr-BE (fixed), de-CH (fixed), sk-SK (fixed), en-ZA (fixed), es-CL (fixed), hi-IN (fixed), zh-CN (fixed), zh-TW (fixed), da-DK (fixed), hi-IN-translit (fixed), el-GR (fixed), he-IL (fixed), pt-BR (fixed), en-AE (fixed), pt-PT (fixed), fr-CH (fixed), ro-RO (fixed), vi-VN (fixed), en-SA (fixed), pl-PL (fixed), es-US (fixed), hi-Latn (fixed), en-SG (fixed), tr-TR (fixed), hr-HR (fixed), ko-KR (fixed), uk-UA (fixed), it-CH (fixed), ar-SA (fixed), id-ID (fixed), en-IN (fixed), es-ES (fixed), de-AT (fixed), en-IE (fixed), cs-CZ (fixed), es-CO (fixed), zh-HK (fixed), sv-SE (fixed), en-PH (fixed), en-ID (fixed), en-CA (fixed), nl-NL (fixed), yue-CN (fixed), en-NZ (fixed), en-GB (fixed), ja-JP (fixed), it-IT (fixed), ru-RU (fixed), en-US (fixed), ms-MY (fixed), es-MX (fixed), hu-HU (fixed), fr-CA (fixed), wuu-CN (fixed), de-DE (fixed), fr-FR (fixed), fi-FI (fixed), nb-NO (fixed), nl-BE (fixed), en-AU (fixed)]
         
         Task(priority: .background) {
             do {

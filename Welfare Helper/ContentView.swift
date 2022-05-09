@@ -9,23 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var bookmarksPresented: Bool = false
-    @StateObject var main = Main()
-    @State var recordingTimes: Int = 0
-    
-    let timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect() // Timer
-    
-    private let JSONDataFromInternet: [CardViewStruct] = [
-        CardViewStruct(title: "No Data", desc: "No Data", info: "No Data", theURL: "https://www.google.com/maps"),
-        CardViewStruct(title: "No Data", desc: "No Data", info: "No Data", theURL: "https://www.google.com/maps"),
-        CardViewStruct(title: "No Data", desc: "No Data", info: "No Data", theURL: "https://www.google.com/maps"),
-        CardViewStruct(title: "No Data", desc: "No Data", info: "No Data", theURL: "https://www.google.com/maps")
-    ]
-    private let JSONDataFromLocal: [CardViewStruct] = [
-        CardViewStruct(title: "No Data", desc: "No Data", info: "No Data", theURL: "https://www.google.com/maps"),
-        CardViewStruct(title: "No Data", desc: "No Data", info: "No Data", theURL: "https://www.google.com/maps"),
-        CardViewStruct(title: "No Data", desc: "No Data", info: "No Data", theURL: "https://www.google.com/maps"),
-        CardViewStruct(title: "No Data", desc: "No Data", info: "No Data", theURL: "https://www.google.com/maps")
-    ]
+    @StateObject var main: Main // temporaryStorage_ObservableObject 3
+        
+    @State private var JSONDataFromInternet: [CardViewStruct] = [CardViewStruct]()
+    @State private var JSONDataFromLocal: [CardViewStruct] = [CardViewStruct]()
     
     var body: some View {
         GeometryReader { metrics in
@@ -34,18 +21,15 @@ struct ContentView: View {
                     header
                     
                     if !bookmarksPresented {
-                        InputView()
-                            .frame(height: 350)
-                            .transition(.slide)
-                        
-                        ForEach(JSONDataFromInternet) { data in
-//                            CardView(cardViewStruct: CardViewStruct.sampleData)
-                            CardView(cardViewStruct: data, isBookmarksPage: CardViewBookmarks(bookmarksPage: false))
-                                .transition(.slide)
-                        }.onAppear(){
+                        InputView(
+                            main: main // temporaryStorage_ObservableObject 6
+                        )
+                        .frame(height: 350)
+                        .transition(.slide)
+                        .onAppear(){
                             // JSON 3
                             // URL Method
-                            let urlString = "https://github.com/cyruslauwork/Welfare-Helper/tree/main/Welfare%20Helper/JSON/data.json"
+                            let urlString = "https://raw.githubusercontent.com/cyruslauwork/Welfare-Helper/main/Welfare%20Helper/JSON/data.json"
                             
                             self.loadJson(fromURLString: urlString) { (result) in
                                 switch result {
@@ -57,12 +41,17 @@ struct ContentView: View {
                             }
                             // JSON 3 end
                         }
-                    } else {
-                        ForEach(JSONDataFromLocal) { data in
+                                                
+                        ForEach(JSONDataFromInternet) { data in
 //                            CardView(cardViewStruct: CardViewStruct.sampleData)
-                            CardView(cardViewStruct: data, isBookmarksPage: CardViewBookmarks(bookmarksPage: true))
+                            CardView(cardViewStruct: data, isBookmarksPage: CardViewBookmarks(bookmarksPage: false))
                                 .transition(.slide)
-                        }.onAppear(){
+                        }
+                    } else {
+                        HStack{
+                            // ...
+                        }
+                        .onAppear(){
                             // JSON 3
                             // Local Method
                             if let localData = self.readLocalFile(forName: "data") {
@@ -70,18 +59,18 @@ struct ContentView: View {
                             }
                             // JSON 3 end
                         }
+                        
+                        ForEach(JSONDataFromLocal) { data in
+//                            CardView(cardViewStruct: CardViewStruct.sampleData)
+                            CardView(cardViewStruct: data, isBookmarksPage: CardViewBookmarks(bookmarksPage: true))
+                                .transition(.slide)
+                        }
                     }
                 }
                 .frame(width: metrics.size.width * 1, height: metrics.size.height * 1, alignment: .center)
                 .background(bookmarksPresented ? ColorPalette.primaryThemeRed.theme.mainColor : ColorPalette.primaryThemeWhite.theme.mainColor)
             }
         }
-        // Timer 2
-        .onReceive(timer) { time in
-            // Make View update automatically
-            recordingTimes = main.recordingTimes
-        }
-        // Timer 2 end
     }
     
     private var header: some View {
@@ -100,7 +89,7 @@ struct ContentView: View {
                 }
             }
             
-            if recordingTimes == 0 {
+            if main.recordingTimes == 0 { // temporaryStorage_ObservableObject 3
                 if !bookmarksPresented {
                     Text("Welcome to \nWelfare Helper!")
                         .font(.system(size: 45, weight: .bold, design: .default))
@@ -146,8 +135,9 @@ struct ContentView: View {
     // JSON 2
     private func parse(jsonData: Data) {
         do {
-            let decodedData = try JSONDecoder().decode(CardViewStruct.self,
-                                                       from: jsonData)
+            let decodedData = try JSONDecoder().decode(CardViewStructs.self, from: jsonData)
+            JSONDataFromInternet = decodedData.Welfares
+            JSONDataFromLocal = decodedData.Welfares
         } catch {
             print("decode error")
         }
@@ -155,8 +145,8 @@ struct ContentView: View {
     // JSON 2 end
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ContentView()
+//    }
+//}

@@ -11,10 +11,10 @@ import AVFoundation // speechRecognizer
 struct InputView: View {
     @StateObject var speechRecognizer = SpeechRecognizer() // speechRecognizer
     @State var isRecording: Bool = false // speechRecognizer 4
-    @StateObject var main = Main()
+    @StateObject var main: Main // temporaryStorage_ObservableObject 5
     
     @State var Transcription: String = "Briefly introduce yourself and see the welfares that suit you"
-    let timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect() // Timer
+    let timer = Timer.publish(every: 0.25, on: .main, in: .common).autoconnect() // Timer
     
     var body: some View {
         VStack {
@@ -48,7 +48,7 @@ struct InputView: View {
                     speechRecognizer.reset()
                     speechRecognizer.transcribe()
                     // speechRecognizer 2 end
-                    main.recordingTimes += 1
+                    main.recordingTimes += 1 // temporaryStorage_ObservableObject 5
                 }
             }) {
                 Image(isRecording ? "restart_alt_FILL0_wght400_GRAD0_opsz48" : "mic_FILL0_wght400_GRAD0_opsz48")
@@ -68,9 +68,9 @@ struct InputView: View {
     }
 }
 
-struct InputView_Previews: PreviewProvider {
-    static var previews: some View {
-        InputView()
-            .previewLayout(.fixed(width: 400, height: 350))
-    }
-}
+//struct InputView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        InputView()
+//            .previewLayout(.fixed(width: 400, height: 350))
+//    }
+//}

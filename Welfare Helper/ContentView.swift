@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var bookmarksPresented: Bool = false
-    @StateObject var main: Main // temporaryStorage_ObservableObject 3
+    @StateObject var main = Main() // temporaryStorage_ObservableObject 2
         
     // JSON 3
     @State private var JSONDataFromInternet: [CardViewStruct] = [CardViewStruct]()
@@ -17,16 +17,16 @@ struct ContentView: View {
     // JSON 3 end
     
     @StateObject var speechRecognizer = SpeechRecognizer()
-    
+            
     var body: some View {
-        GeometryReader { metrics in
+        GeometryReader { metrics in // Enable screensize percentage calculation
             LazyVStack{
                 ScrollView(.vertical) {
-                    header
+                    self.header
                     
-                    if !bookmarksPresented {
+                    if !self.bookmarksPresented {
                         InputView(
-                            main: main // temporaryStorage_ObservableObject 6
+                            main: self.main // temporaryStorage_ObservableObject 6
                         )
                         .frame(height: 350)
                         .transition(.slide)
@@ -46,7 +46,7 @@ struct ContentView: View {
                             // JSON 4 end
                         }
                                                                         
-                        ForEach(JSONDataFromInternet, id: \.self) { data in
+                        ForEach(self.JSONDataFromInternet, id: \.self) { data in
 //                            CardView(cardViewStruct: CardViewStruct.sampleData)
 
                             ForEach(data.conditions, id: \.self) { el in
@@ -54,7 +54,7 @@ struct ContentView: View {
                                 // and the "data.conditions" array is now parsed.
 
 //                                if ARRAY.contains(where: {$0.caseInsensitiveCompare(el) == .orderedSame}) { // Matching from an Array
-                                if speechRecognizer.transcript.range(of: el, options: .caseInsensitive) != nil { // Matching from a String
+                                if self.speechRecognizer.transcript.range(of: el, options: .caseInsensitive) != nil { // Matching from a String
                                     CardView(cardViewStruct: data, isBookmarksPage: CardViewBookmarks(bookmarksPage: false))
                                         .transition(.slide)
                                 }
@@ -70,7 +70,7 @@ struct ContentView: View {
                             // JSON 4 end
                         }
                         
-                        ForEach(JSONDataFromLocal, id: \.self) { data in
+                        ForEach(self.JSONDataFromLocal, id: \.self) { data in
 //                            CardView(cardViewStruct: CardViewStruct.sampleData)
 
                             CardView(cardViewStruct: data, isBookmarksPage: CardViewBookmarks(bookmarksPage: true))
@@ -79,7 +79,7 @@ struct ContentView: View {
                     }
                 }
                 .frame(width: metrics.size.width * 1, height: metrics.size.height * 1, alignment: .center)
-                .background(bookmarksPresented ? ColorPalette.primaryThemeRed.theme.mainColor : ColorPalette.primaryThemeWhite.theme.mainColor)
+                .background(self.bookmarksPresented ? ColorPalette.primaryThemeRed.theme.mainColor : ColorPalette.primaryThemeWhite.theme.mainColor)
             }
         }
     }
@@ -90,18 +90,18 @@ struct ContentView: View {
                 Spacer()
                 
                 Button(action: {
-                    withAnimation(.easeInOut) { bookmarksPresented.toggle() } // To enable animation
+                    withAnimation(.easeInOut) { self.bookmarksPresented.toggle() } // To enable animation
                 }) {
-                    Image(bookmarksPresented ? "home_FILL0_wght400_GRAD0_opsz48" : "bookmarks_FILL0_wght400_GRAD0_opsz48")
+                    Image(self.bookmarksPresented ? "home_FILL0_wght400_GRAD0_opsz48" : "bookmarks_FILL0_wght400_GRAD0_opsz48")
                         .resizable()
                         .renderingMode(.template)
-                        .foregroundColor(bookmarksPresented ? ColorPalette.primaryThemeRed.theme.accentColor : ColorPalette.primaryThemeRed.theme.mainColor)
+                        .foregroundColor(self.bookmarksPresented ? ColorPalette.primaryThemeRed.theme.accentColor : ColorPalette.primaryThemeRed.theme.mainColor)
                         .frame(width: 75.0, height: 75.0)
                 }
             }
             
-            if main.recordingTimes == 0 { // temporaryStorage_ObservableObject 3
-                if !bookmarksPresented {
+            if self.main.recordingTimes == 0 { // temporaryStorage_ObservableObject 6
+                if !self.bookmarksPresented {
                     Text("Welcome to \nWelfare Helper!")
                         .font(.system(size: 45, weight: .bold, design: .default))
                         .transition(.slide)
@@ -148,11 +148,8 @@ struct ContentView: View {
         do {
             let decodedData = try JSONDecoder().decode(CardViewStructs.self, from: jsonData)
             
-            JSONDataFromInternet = decodedData.Welfares
-            JSONDataFromLocal = decodedData.Welfares
-            
-//            print(JSONDataFromInternet)
-//            print(JSONDataFromLocal)
+            self.JSONDataFromInternet = decodedData.Welfares
+            self.JSONDataFromLocal = decodedData.Welfares
         } catch {
             print("decode error")
         }

@@ -14,45 +14,45 @@ struct CardView: View {
     @State var isBookmarksPage: CardViewBookmarks
         
     var body: some View {
-        content
+        self.content
     }
     
     private var content: some View {
         VStack(alignment: .leading) {
-            header
+            self.header
             Spacer()
             
-            if isExpanded {
-                Text(cardViewStruct.desc)
+            if self.isExpanded {
+                Text(self.cardViewStruct.desc)
                     .font(.headline)
-                    .accessibilityLabel("\(cardViewStruct.desc)")
+                    .accessibilityLabel("\(self.cardViewStruct.desc)")
                 Spacer()
                     .padding(.top)
                 
-                Link(cardViewStruct.info, destination: URL(string: cardViewStruct.theURL)!)
+                Link(self.cardViewStruct.info, destination: URL(string: self.cardViewStruct.theURL)!)
                     .font(.headline.weight(.bold))
-                    .accessibilityLabel("\(cardViewStruct.info)")
+                    .accessibilityLabel("\(self.cardViewStruct.info)")
                 Spacer()
 
                 HStack {
                     Spacer()
                     
                     Button(action: {
-                        isBookmarksPage.bookmarksPage.toggle()
+                        self.isBookmarksPage.bookmarksPage.toggle()
                         
                         if var Array = UserDefaults.standard.array(forKey: "bookmarksArray") {
                             
-                            if !Array.contains(where: { $0 as! Int == cardViewStruct.id }) {
+                            if !Array.contains(where: { $0 as! Int == self.cardViewStruct.id }) {
                                 // Add a new element to the end of an Array.
-                                Array.append(cardViewStruct.id)
+                                Array.append(self.cardViewStruct.id)
                                 
                                 UserDefaults.standard.set(Array, forKey: "bookmarksArray") // Reset array object
                             }
                         } else {
-                            UserDefaults.standard.set([cardViewStruct.id], forKey: "bookmarksArray") // Set array object
+                            UserDefaults.standard.set([self.cardViewStruct.id], forKey: "bookmarksArray") // Set array object
                         }
                     }) {
-                        Image(isBookmarksPage.bookmarksPage ? "bookmark_remove_FILL0_wght400_GRAD0_opsz48" : "bookmark_add_FILL0_wght400_GRAD0_opsz48")
+                        Image(self.isBookmarksPage.bookmarksPage ? "bookmark_remove_FILL0_wght400_GRAD0_opsz48" : "bookmark_add_FILL0_wght400_GRAD0_opsz48")
                             .renderingMode(.template)
                             .foregroundColor(ColorPalette.primaryThemeBlue.theme.accentColor)
                     }
@@ -70,7 +70,7 @@ struct CardView: View {
     
     private var header: some View {
         HStack {
-            Text(cardViewStruct.title)
+            Text(self.cardViewStruct.title)
                 .font(.title2.weight(.bold))
                 .accessibilityAddTraits(.isHeader)
             Spacer()
@@ -80,7 +80,7 @@ struct CardView: View {
                 .foregroundColor(ColorPalette.primaryThemeBlue.theme.accentColor)
         }
         .onTapGesture {
-            withAnimation { isExpanded.toggle() }
+            withAnimation { self.isExpanded.toggle() }
         }
     }
 }

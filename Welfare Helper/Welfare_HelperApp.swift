@@ -8,14 +8,10 @@
 import SwiftUI
 
 @main
-struct Welfare_HelperApp: App {
-    @StateObject var main = Main() // temporaryStorage_ObservableObject 2
-    
+struct Welfare_HelperApp: App {    
     var body: some Scene {
         WindowGroup {
-            ContentView(
-                main: main // temporaryStorage_ObservableObject 4
-            )
+            ContentView()
         }
     }
 }

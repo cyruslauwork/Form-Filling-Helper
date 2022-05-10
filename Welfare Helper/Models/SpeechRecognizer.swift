@@ -30,7 +30,7 @@ class SpeechRecognizer: ObservableObject {
         }
     }
     
-    var transcript: String = "Briefly introduce yourself and see the welfares that suit you"
+    var transcript: String = ""
     
     private var audioEngine: AVAudioEngine?
     private var request:  SFSpeechAudioBufferRecognitionRequest?

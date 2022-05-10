@@ -11,8 +11,10 @@ struct ContentView: View {
     @State private var bookmarksPresented: Bool = false
     @StateObject var main: Main // temporaryStorage_ObservableObject 3
         
+    // JSON 3
     @State private var JSONDataFromInternet: [CardViewStruct] = [CardViewStruct]()
     @State private var JSONDataFromLocal: [CardViewStruct] = [CardViewStruct]()
+    // JSON 3 end
     
     @StateObject var speechRecognizer = SpeechRecognizer()
     
@@ -30,7 +32,7 @@ struct ContentView: View {
                         .transition(.slide)
                         
                         HStack{}.onAppear(){
-                            // JSON 3
+                            // JSON 4
                             // URL Method
                             let urlString = "https://raw.githubusercontent.com/cyruslauwork/Welfare-Helper/main/Welfare%20Helper/JSON/data.json"
                             self.loadJson(fromURLString: urlString) { (result) in
@@ -41,7 +43,7 @@ struct ContentView: View {
                                     print(error)
                                 }
                             }
-                            // JSON 3 end
+                            // JSON 4 end
                         }
                                                                         
                         ForEach(JSONDataFromInternet, id: \.self) { data in
@@ -60,12 +62,12 @@ struct ContentView: View {
                         }
                     } else {
                         HStack{}.onAppear(){
-                            // JSON 3
+                            // JSON 4
                             // Local Method
                             if let localData = self.readLocalFile(forName: "data") {
                                 self.parse(jsonData: localData)
                             }
-                            // JSON 3 end
+                            // JSON 4 end
                         }
                         
                         ForEach(JSONDataFromLocal, id: \.self) { data in
@@ -149,8 +151,8 @@ struct ContentView: View {
             JSONDataFromInternet = decodedData.Welfares
             JSONDataFromLocal = decodedData.Welfares
             
-            print(JSONDataFromInternet)
-            print(JSONDataFromLocal)
+//            print(JSONDataFromInternet)
+//            print(JSONDataFromLocal)
         } catch {
             print("decode error")
         }

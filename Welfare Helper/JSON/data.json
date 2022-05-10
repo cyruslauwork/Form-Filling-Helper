@@ -6,7 +6,7 @@
             "desc":"A special monthly allowance to supplement the living expenses of Hong Kong elderly people aged 65 or above who are in need of financial support. The current monthly payments of Normal OALA and Higher OALA are $2,920 and $3,915 respectively.",
             "info":"Click here to find Smart Form kiosk locations near you on Google Maps",
             "theURL":"https://www.google.com/maps",
-            "conditions":["Briefly","introduce","yourself"]
+            "conditions":["short of cash","poor","without income"]
         },
         {
             "id":2,

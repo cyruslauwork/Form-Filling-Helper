@@ -16,7 +16,8 @@ struct ContentView: View {
     @State private var JSONDataFromLocal: [CardViewStruct] = [CardViewStruct]()
     // JSON 3 end
     
-    @StateObject var speechRecognizer = SpeechRecognizer()
+    @StateObject var speechRecognizer = SpeechRecognizer() // speechRecognizer 2
+    @State private var timer = Timer.publish(every: 0.25, on: .main, in: .common).autoconnect()
             
     var body: some View {
         GeometryReader { metrics in // Enable screensize percentage calculation
@@ -25,12 +26,6 @@ struct ContentView: View {
                     self.header
                     
                     if !self.bookmarksPresented {
-                        InputView(
-                            main: self.main // temporaryStorage_ObservableObject 6
-                        )
-                        .frame(height: 350)
-                        .transition(.slide)
-                        
                         HStack{}.onAppear(){
                             // JSON 4
                             // URL Method
@@ -45,21 +40,32 @@ struct ContentView: View {
                             }
                             // JSON 4 end
                         }
-                                                                        
-                        ForEach(self.JSONDataFromInternet, id: \.self) { data in
-//                            CardView(cardViewStruct: CardViewStruct.sampleData)
+                        
+                        InputView(
+                            speechRecognizer: self.speechRecognizer, // speechRecognizer 2
+                            main: self.main // temporaryStorage_ObservableObject 6
+                        )
+                        .frame(height: 350)
+                        .transition(.slide)
 
-                            ForEach(data.conditions, id: \.self) { el in
-                                // "data.conditions" conform to "CardViewStruct.conditions",
-                                // and the "data.conditions" array is now parsed.
+                        // autoRefreshView
+                        TimelineView(.periodic(from: .now, by: 2.5)) { timeline in // Auto refresh in every particular time
+                            ForEach(self.JSONDataFromInternet, id: \.self) { data in
+    //                            CardView(cardViewStruct: CardViewStruct.sampleData)
 
-//                                if ARRAY.contains(where: {$0.caseInsensitiveCompare(el) == .orderedSame}) { // Matching from an Array
-                                if self.speechRecognizer.transcript.range(of: el, options: .caseInsensitive) != nil { // Matching from a String
-                                    CardView(cardViewStruct: data, isBookmarksPage: CardViewBookmarks(bookmarksPage: false))
-                                        .transition(.slide)
+                                ForEach(data.conditions, id: \.self) { el in
+                                    // "data.conditions" conform to "CardViewStruct.conditions",
+                                    // and the "data.conditions" array is now parsed.
+
+    //                                if ARRAY.contains(where: {$0.caseInsensitiveCompare(el) == .orderedSame}) { // Matching from an Array
+                                    if self.speechRecognizer.transcript.range(of: el, options: .caseInsensitive) != nil { // Matching from a String
+                                        CardView(cardViewStruct: data, isBookmarksPage: CardViewBookmarks(bookmarksPage: false))
+                                            .transition(.slide)
+                                    }
                                 }
                             }
                         }
+                        // autoRefreshView end
                     } else {
                         HStack{}.onAppear(){
                             // JSON 4
@@ -148,8 +154,8 @@ struct ContentView: View {
         do {
             let decodedData = try JSONDecoder().decode(CardViewStructs.self, from: jsonData)
             
-            self.JSONDataFromInternet = decodedData.Welfares
-            self.JSONDataFromLocal = decodedData.Welfares
+            self.JSONDataFromInternet = decodedData.Welfares.self
+            self.JSONDataFromLocal = decodedData.Welfares.self
         } catch {
             print("decode error")
         }

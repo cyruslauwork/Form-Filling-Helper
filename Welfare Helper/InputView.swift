@@ -9,15 +9,15 @@ import SwiftUI
 import AVFoundation // speechRecognizer
 
 struct InputView: View {
-    @StateObject var speechRecognizer = SpeechRecognizer() // speechRecognizer
+    @ObservedObject var speechRecognizer: SpeechRecognizer // speechRecognizer 3
     @ObservedObject var main: Main // @ObservedObject or @StateObject, the latter is more reliable // temporaryStorage_ObservableObject 3
     
-    @State var Transcription: String = "Briefly introduce yourself and see the welfares that suit you"// speechRecognizer 4
-    let timer = Timer.publish(every: 0.25, on: .main, in: .common).autoconnect() // Timer
+    @State var Transcription: String = "Briefly introduce yourself and see the welfares that suit you"// speechRecognizer 6
+    @State private var timer = Timer.publish(every: 0.25, on: .main, in: .common).autoconnect() // Timer
     
     var body: some View {
         VStack {
-            Text(self.Transcription) // speechRecognizer 6
+            Text(self.Transcription) // speechRecognizer 8
                 .font(.headline)
                 .frame(
                     minWidth: 0,
@@ -32,7 +32,7 @@ struct InputView: View {
                 .onReceive(self.timer) { time in
                     // Make View update automatically
                     if self.main.isRecording {
-                        self.Transcription = self.speechRecognizer.transcript // speechRecognizer 5
+                        self.Transcription = self.speechRecognizer.transcript // speechRecognizer 7
                     }
                 }
                 // Timer 2 end
@@ -41,16 +41,20 @@ struct InputView: View {
                 withAnimation(.easeInOut) { self.main.isRecording.toggle() }
                 
                 if !self.main.isRecording {
-                    self.speechRecognizer.stopTranscribing() // speechRecognizer 3
+                    self.stopTimer() // Timer 4
                     
-                    self.Transcription = "Briefly introduce yourself and see the welfares that suit you"
+                    self.speechRecognizer.stopTranscribing() // speechRecognizer 5
+                    
+                    self.Transcription = "Briefly introduce yourself and see the welfares that suit you" // speechRecognizer 8
                 } else {
-                    self.speechRecognizer.transcript = "Briefly introduce yourself..."
+                    self.startTimer() // Timer 4
                     
-                    // speechRecognizer 2
+                    self.speechRecognizer.transcript = "Briefly introduce yourself..." // speechRecognizer 9
+                    
+                    // speechRecognizer 4
                     self.speechRecognizer.reset()
                     self.speechRecognizer.transcribe()
-                    // speechRecognizer 2 end
+                    // speechRecognizer 4 end
                     
                     self.main.recordingTimes += 1 // temporaryStorage_ObservableObject 4
                 }
@@ -70,6 +74,15 @@ struct InputView: View {
         )
         .padding()
     }
+    
+    // Timer 3
+    func stopTimer() {
+        self.timer.upstream.connect().cancel()
+    }
+    func startTimer() {
+        self.timer = Timer.publish(every: 0.25, on: .main, in: .common).autoconnect()
+    }
+    // Timer end
 }
 
 //struct InputView_Previews: PreviewProvider {

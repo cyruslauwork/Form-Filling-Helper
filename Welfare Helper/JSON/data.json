@@ -22,7 +22,7 @@
             "desc":"JoyYou Card is an On-Loan Personalised Octopus designed for Hong Kong residents aged 60 or above. JoyYou Card holders can travel on designated public transport modes and services at a concessionary fare of $2 per trip under the Government Public Transport Fare Concession Scheme for the Elderly and Eligible Persons with Disabilities ($2 Scheme) starting from 27 February 2022.",
             "info":"Click here to find Smart Form kiosk locations near you on Google Maps",
             "theURL":"https://www.google.com/maps",
-            "conditions":["short","poor","hard","elderly","old","job","senior","money","income","cash","low","primary","kindergarten","unhealthy","food","live","living","spend","spending","cost","costs","costly","pay","payment","payments","fee","fees","charge","charges","expense","expenses","expensive","travel","bus","MTR","mini","train","trip","shopping","sightseeing","tour","viewpoint","visit","visitor","traveller","have a look","see","watch","seaview","habour","card"]
+            "conditions":["elderly","old","senior","travel","bus","MTR","mini","train","trip","shopping","sightseeing","tour","viewpoint","visit","visitor","traveller","have a look","see","watch","seaview","habour","card"]
         },
         {
             "id":4,
@@ -38,7 +38,7 @@
             "desc":"Senior Citizen Home Safety Association (‘SCHSA’) was founded in 1996 as a non-profit charitable organisation with a self-financing model. Today it is one of the most established social enterprises in Hong Kong. SCHSA provides Care-on-Call Service, a comprehensive 24/7 support service consisting of emergency aid, integrated care, around-the-clock vigilance service, health management, and day-to-day living assistance.",
             "info":"Click here to find Smart Form kiosk locations near you on Google Maps",
             "theURL":"https://www.google.com/maps",
-            "conditions":["elderly","old","primary","kindergarten","die","dead","death","widowed","sick","disability","unhealthy","family","child"]
+            "conditions":["elderly","old","senior"]
         },
         {
             "id":6,
@@ -54,7 +54,7 @@
             "desc":"Hong Kong Sheng Kung Hui Welfare Council and Sun Hung Kai Properties have collaborated in the establishment of “United Count” Transitional Housing Project at Tung Tau, Yuen Long, with the support of government funding. The Project will provide about 1,800 units with the objective of improving the living conditions of grassroots families. Through the delivery of social services, we aim to inspire our residents to participate actively in the activities of United Count, thereby building a caring, supportive and inclusive community together.",
             "info":"Click here to find Smart Form kiosk locations near you on Google Maps",
             "theURL":"https://www.google.com/maps",
-            "conditions":["short","poor","hard","elderly","old","job","senior","money","income","cash","low","primary","kindergarten","die","dead","death","widowed","sick","disability","unhealthy","food","live","living","illness","sickness","spend","spending","cost","costs","costly","pay","payment","payments","fee","fees","charge","charges","expense","expenses","expensive","bread","breads","ruin","ruins","cold","public","housing","small","tiny","dirty","help","need","needs","family","house","home","place","bed","beds","sleep","sleeping","rent","renting","room","accomodation","suite","emergency","placement","residential","transition","housing","child"]
+            "conditions":["short","poor","hard","money","income","cash","low","primary","kindergarten","live","living","illness","sickness","spend","spending","cost","costs","costly","pay","payment","payments","fee","fees","charge","charges","expense","expenses","expensive","bread","breads","ruin","ruins","cold","public","housing","small","tiny","dirty","help","need","needs","family","house","home","place","bed","beds","sleep","sleeping","rent","renting","room","accomodation","suite","emergency","placement","residential","transition","housing","child"]
         },
         {
             "id":8,
@@ -70,7 +70,7 @@
             "desc":"Emergency placement is provided in some subvented residential care homes for the elderly and nursing homes to offer temporary or short-term residential care service for elders. It serves the objective of guarding the elders against risks arising from lack of immediate care/accommodation until their next-of-kin are located for the elder's restoration to families, or other alternatives are arranged.",
             "info":"Click here to find Smart Form kiosk locations near you on Google Maps",
             "theURL":"https://www.google.com/maps",
-            "conditions":["short","poor","hard","elderly","old","job","senior","money","income","cash","low","primary","kindergarten","die","dead","death","widowed","sick","disability","unhealthy","food","live","living","illness","sickness","spend","spending","cost","costs","costly","pay","payment","payments","fee","fees","charge","charges","expense","expenses","expensive","bread","breads","ruin","ruins","cold","public","housing","small","tiny","dirty","help","need","needs","family","house","home","place","bed","beds","sleep","sleeping","rent","renting","room","accomodation","suite","emergency","placement","residential","nursing","guarding","homes"]
+            "conditions":["elderly","old","senior","help","house","home","place","bed","beds","sleep","sleeping","rent","renting","room","accomodation","suite","emergency","placement","residential","nursing","guarding","homes"]
         },
         {
             "id":10,

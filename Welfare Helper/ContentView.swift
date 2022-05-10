@@ -33,7 +33,7 @@ struct ContentView: View {
                             self.loadJson(fromURLString: urlString) { (result) in
                                 switch result {
                                 case .success(let data):
-                                    self.parse(jsonData: data)
+                                    self.parse(jsonData: data, isURL: true)
                                 case .failure(let error):
                                     print(error)
                                 }
@@ -51,7 +51,6 @@ struct ContentView: View {
                         // autoRefreshView
                         TimelineView(.periodic(from: .now, by: 2.5)) { timeline in // Auto refresh in every particular time
                             ForEach(self.JSONDataFromInternet, id: \.self) { data in
-    //                            CardView(cardViewStruct: CardViewStruct.sampleData)
 
                                 ForEach(data.conditions, id: \.self) { el in
                                     // "data.conditions" conform to "CardViewStruct.conditions",
@@ -59,28 +58,55 @@ struct ContentView: View {
 
     //                                if ARRAY.contains(where: {$0.caseInsensitiveCompare(el) == .orderedSame}) { // Matching from an Array
                                     if self.speechRecognizer.transcript.range(of: el, options: .caseInsensitive) != nil { // Matching from a String
-                                        CardView(cardViewStruct: data, isBookmarksPage: CardViewBookmarks(bookmarksPage: false))
+                                        CardView(cardViewStruct: data, isBookmarksPage: CardViewBookmarks(BOOL: false))
                                             .transition(.slide)
                                     }
                                 }
                             }
                         }
                         // autoRefreshView end
-                    } else {
-                        HStack{}.onAppear(){
-                            // JSON 4
-                            // Local Method
-                            if let localData = self.readLocalFile(forName: "data") {
-                                self.parse(jsonData: localData)
-                            }
-                            // JSON 4 end
-                        }
                         
-                        ForEach(self.JSONDataFromLocal, id: \.self) { data in
-//                            CardView(cardViewStruct: CardViewStruct.sampleData)
-
-                            CardView(cardViewStruct: data, isBookmarksPage: CardViewBookmarks(bookmarksPage: true))
-                                .transition(.slide)
+                    } else {
+                        // 1. If show all instead of using bookmark function
+//                        HStack{}.onAppear(){
+//                            // JSON 4
+//                            // Local Method
+//                            if let localData = self.readLocalFile(forName: "data") {
+//                                self.parse(jsonData: localData, isURL: false)
+//                            }
+//
+//                            // URL Method
+//                            let urlString = "https://raw.githubusercontent.com/cyruslauwork/Welfare-Helper/main/Welfare%20Helper/JSON/data.json"
+//                            self.loadJson(fromURLString: urlString) { (result) in
+//                                switch result {
+//                                case .success(let data):
+//                                    self.parse(jsonData: data, isURL: true)
+//                                case .failure(let error):
+//                                    print(error)
+//                                }
+//                            }
+//                            // JSON 4 end
+//                        }
+//                        ForEach(
+//                            self.JSONDataFromLocal // Local Method
+//                            self.JSONDataFromInternet // URL Method
+//                                , id: \.self) { data in
+////                            CardView(cardViewStruct: CardViewStruct.sampleData)
+//
+//                            CardView(cardViewStruct: data, isBookmarksPage: CardViewBookmarks(BOOL: true))
+//                                .transition(.slide)
+//                        }
+                        
+                        // 2. Using bookmark function
+                        // Get bookmarks
+                        if let rawArray: [Int] = UserDefaults.standard.array(forKey: "bookmarksArray") as? [Int] {
+                            ForEach(self.JSONDataFromInternet, id: \.self) { data in
+                                // Check if an array element is exists
+                                if rawArray.contains(where: { $0 == data.id }) {
+                                    CardView(cardViewStruct: data, isBookmarksPage: CardViewBookmarks(BOOL: true))
+                                        .transition(.slide)
+                                }
+                            }
                         }
                     }
                 }
@@ -150,12 +176,15 @@ struct ContentView: View {
     }
     // JSON end
     // JSON 2
-    private func parse(jsonData: Data) {
+    private func parse(jsonData: Data, isURL: Bool) {
         do {
             let decodedData = try JSONDecoder().decode(CardViewStructs.self, from: jsonData)
             
-            self.JSONDataFromInternet = decodedData.Welfares.self
-            self.JSONDataFromLocal = decodedData.Welfares.self
+            if isURL {
+                self.JSONDataFromInternet = decodedData.Welfares.self
+            } else {
+                self.JSONDataFromLocal = decodedData.Welfares.self
+            }
         } catch {
             print("decode error")
         }

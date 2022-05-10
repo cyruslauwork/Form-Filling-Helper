@@ -6,7 +6,7 @@
             "desc":"A special monthly allowance to supplement the living expenses of Hong Kong elderly people aged 65 or above who are in need of financial support. The current monthly payments of Normal OALA and Higher OALA are $2,920 and $3,915 respectively.",
             "info":"Click here to find Smart Form kiosk locations near you on Google Maps",
             "theURL":"https://www.google.com/maps",
-            "conditions":["short of cash","poor","without income"]
+            "conditions":["short","poor","hard","elderly","old","job","senior","money","income","cash","low","primary","kindergarten","die","dead","death","widowed","sick","disability","unhealthy","food","live","living","illness","sickness","spend","spending","cost","costs","costly","pay","payment","payments","fee","fees","charge","charges","expense","expenses","expensive","bread","breads","ruin","ruins","cold","public housing","small","tiny","dirty","help","need","needs"]
         },
         {
             "id":2,
@@ -14,7 +14,7 @@
             "desc":"The Senior Citizen Card provides a generally recognized proof of age to elders so as to facilitate their access to concessions, discounts or priority services offered by Government departments, public transport, private and commercial establishments.",
             "info":"Click here to find Smart Form kiosk locations near you on Google Maps",
             "theURL":"https://www.google.com/maps",
-            "conditions":["","",""]
+            "conditions":["elderly","old","senior","card"]
         },
         {
             "id":3,
@@ -22,7 +22,7 @@
             "desc":"JoyYou Card is an On-Loan Personalised Octopus designed for Hong Kong residents aged 60 or above. JoyYou Card holders can travel on designated public transport modes and services at a concessionary fare of $2 per trip under the Government Public Transport Fare Concession Scheme for the Elderly and Eligible Persons with Disabilities ($2 Scheme) starting from 27 February 2022.",
             "info":"Click here to find Smart Form kiosk locations near you on Google Maps",
             "theURL":"https://www.google.com/maps",
-            "conditions":["","",""]
+            "conditions":["short","poor","hard","elderly","old","job","senior","money","income","cash","low","primary","kindergarten","unhealthy","food","live","living","spend","spending","cost","costs","costly","pay","payment","payments","fee","fees","charge","charges","expense","expenses","expensive","travel","bus","MTR","mini","train","trip","shopping","sightseeing","tour","viewpoint","visit","visitor","traveller","have a look","see","watch","seaview","habour","card"]
         },
         {
             "id":4,
@@ -30,7 +30,7 @@
             "desc":"The Old Age Allowance is a monthly allowance provided by Social Welfare Department (SWD) to Hong Kong elderly residents aged 70 or above to meet special needs arising from old age. The Scheme is non-means-tested.",
             "info":"Click here to find Smart Form kiosk locations near you on Google Maps",
             "theURL":"https://www.google.com/maps",
-            "conditions":["","",""]
+            "conditions":["short","poor","hard","elderly","old","job","senior","money","income","cash","low","primary","kindergarten","die","dead","death","widowed","sick","disability","unhealthy","food","live","living","illness","sickness","spend","spending","cost","costs","costly","pay","payment","payments","fee","fees","charge","charges","expense","expenses","expensive","bread","breads","ruin","ruins","cold","public housing","small","tiny","dirty","help","need","needs"]
         },
         {
             "id":5,
@@ -38,7 +38,7 @@
             "desc":"Senior Citizen Home Safety Association (‘SCHSA’) was founded in 1996 as a non-profit charitable organisation with a self-financing model. Today it is one of the most established social enterprises in Hong Kong. SCHSA provides Care-on-Call Service, a comprehensive 24/7 support service consisting of emergency aid, integrated care, around-the-clock vigilance service, health management, and day-to-day living assistance.",
             "info":"Click here to find Smart Form kiosk locations near you on Google Maps",
             "theURL":"https://www.google.com/maps",
-            "conditions":["","",""]
+            "conditions":["elderly","old","primary","kindergarten","die","dead","death","widowed","sick","disability","unhealthy","family","child"]
         },
         {
             "id":6,
@@ -46,7 +46,7 @@
             "desc":"The Hong Kong Sheng Kung Hui has been providing welfare services to the people of Hong Kong since the 19th century. In the 1960s, The Children's Meals Society was established to provide nutritious meals to the poor children of Hong Kong and to feed and clothe the disadvantaged.",
             "info":"Click here to find Smart Form kiosk locations near you on Google Maps",
             "theURL":"https://www.google.com/maps",
-            "conditions":["","",""]
+            "conditions":["short","poor","hard","elderly","old","job","senior","money","income","cash","low","primary","kindergarten","die","dead","death","widowed","sick","disability","unhealthy","food","live","living","illness","sickness","spend","spending","cost","costs","costly","pay","payment","payments","fee","fees","charge","charges","expense","expenses","expensive","bread","breads","ruin","ruins","cold","public housing","small","tiny","dirty","help","need","needs","children","children","kid","kids","bady","babies","eat","child"]
         },
         {
             "id":7,
@@ -54,7 +54,7 @@
             "desc":"Hong Kong Sheng Kung Hui Welfare Council and Sun Hung Kai Properties have collaborated in the establishment of “United Count” Transitional Housing Project at Tung Tau, Yuen Long, with the support of government funding. The Project will provide about 1,800 units with the objective of improving the living conditions of grassroots families. Through the delivery of social services, we aim to inspire our residents to participate actively in the activities of United Count, thereby building a caring, supportive and inclusive community together.",
             "info":"Click here to find Smart Form kiosk locations near you on Google Maps",
             "theURL":"https://www.google.com/maps",
-            "conditions":["","",""]
+            "conditions":["short","poor","hard","elderly","old","job","senior","money","income","cash","low","primary","kindergarten","die","dead","death","widowed","sick","disability","unhealthy","food","live","living","illness","sickness","spend","spending","cost","costs","costly","pay","payment","payments","fee","fees","charge","charges","expense","expenses","expensive","bread","breads","ruin","ruins","cold","public","housing","small","tiny","dirty","help","need","needs","family","house","home","place","bed","beds","sleep","sleeping","rent","renting","room","accomodation","suite","emergency","placement","residential","transition","housing","child"]
         },
         {
             "id":8,
@@ -62,15 +62,15 @@
             "desc":"The CSSA Scheme provides a safety net for those who cannot support themselves financially. It is designed to bring their income up to a prescribed level to meet their basic needs.",
             "info":"Click here to find Smart Form kiosk locations near you on Google Maps",
             "theURL":"https://www.google.com/maps",
-            "conditions":["","",""]
+            "conditions":["short","poor","hard","elderly","old","job","senior","money","income","cash","low","primary","kindergarten","die","dead","death","widowed","sick","disability","unhealthy","food","live","living","illness","sickness","spend","spending","cost","costs","costly","pay","payment","payments","fee","fees","charge","charges","expense","expenses","expensive","bread","breads","ruin","ruins","cold","public","housing","small","tiny","dirty","help","need","needs","children","children","kid","kids","bady","babies","eat","assistance","aids","nothing","emergency"]
         },
         {
             "id":9,
             "title":"Residential Care Services for the Elderly > Emergency Placement",
-            "desc":"Emergency placement is provided in some subvented residential care homes for the elderly and nursing homes to offer temporary or short-term residential care service for elders. It serves the objective of guarding the elders against risks arising from lack of immediate care/accommodation until their next-of-kin are located for the elder's  restoration to families, or other alternatives are arranged.",
+            "desc":"Emergency placement is provided in some subvented residential care homes for the elderly and nursing homes to offer temporary or short-term residential care service for elders. It serves the objective of guarding the elders against risks arising from lack of immediate care/accommodation until their next-of-kin are located for the elder's restoration to families, or other alternatives are arranged.",
             "info":"Click here to find Smart Form kiosk locations near you on Google Maps",
             "theURL":"https://www.google.com/maps",
-            "conditions":["","",""]
+            "conditions":["short","poor","hard","elderly","old","job","senior","money","income","cash","low","primary","kindergarten","die","dead","death","widowed","sick","disability","unhealthy","food","live","living","illness","sickness","spend","spending","cost","costs","costly","pay","payment","payments","fee","fees","charge","charges","expense","expenses","expensive","bread","breads","ruin","ruins","cold","public","housing","small","tiny","dirty","help","need","needs","family","house","home","place","bed","beds","sleep","sleeping","rent","renting","room","accomodation","suite","emergency","placement","residential","nursing","guarding","homes"]
         },
         {
             "id":10,
@@ -78,7 +78,7 @@
             "desc":"The objective of the PCSSA Scheme is to enable elderly CSSA recipients who meet the prescribed criteria to continue to receive cash assistance under the CSSA Scheme if they choose to retire permanently in Guangdong or Fujian.",
             "info":"Click here to find Smart Form kiosk locations near you on Google Maps",
             "theURL":"https://www.google.com/maps",
-            "conditions":["","",""]
+            "conditions":["short","poor","hard","elderly","old","job","senior","money","income","cash","low","primary","kindergarten","die","dead","death","widowed","sick","disability","unhealthy","food","live","living","illness","sickness","spend","spending","cost","costs","costly","pay","payment","payments","fee","fees","charge","charges","expense","expenses","expensive","bread","breads","ruin","ruins","cold","public","housing","small","tiny","dirty","help","need","needs","children","children","kid","kids","bady","babies","eat","assistance","aids","nothing","emergency","Guangdong","Fujian","mainland","China","hometown","countryside","Putonghua","Mandarin"]
         }
     ]
 }

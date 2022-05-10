@@ -38,21 +38,31 @@ struct CardView: View {
                     Spacer()
                     
                     Button(action: {
-                        self.isBookmarksPage.bookmarksPage.toggle()
+                        self.isBookmarksPage.BOOL.toggle()
                         
-                        if var Array = UserDefaults.standard.array(forKey: "bookmarksArray") {
-                            
-                            if !Array.contains(where: { $0 as! Int == self.cardViewStruct.id }) {
-                                // Add a new element to the end of an Array.
-                                Array.append(self.cardViewStruct.id)
+                        // userDefaults_bookmarksArray
+                        if self.isBookmarksPage.BOOL {
+                            if var Array = UserDefaults.standard.array(forKey: "bookmarksArray") {
                                 
-                                UserDefaults.standard.set(Array, forKey: "bookmarksArray") // Reset array object
+                                if !Array.contains(where: { $0 as! Int == self.cardViewStruct.id }) { // Check if value exists
+                                    // Add a new element to the end of an Array.
+                                    Array.append(self.cardViewStruct.id)
+                                    
+                                    UserDefaults.standard.set(Array, forKey: "bookmarksArray") // Reset array object
+                                }
+                            } else {
+                                UserDefaults.standard.set([self.cardViewStruct.id], forKey: "bookmarksArray") // Set array object
                             }
+                            
                         } else {
-                            UserDefaults.standard.set([self.cardViewStruct.id], forKey: "bookmarksArray") // Set array object
+                            let rawArray: [Int] = UserDefaults.standard.array(forKey: "bookmarksArray") as! [Int]
+                            let Array = rawArray.filter { $0 != self.cardViewStruct.id }
+                            // A non-mutating alternative that will keep the original collection unchanged is to use filter to create a new collection without the elements you want removed
+                            UserDefaults.standard.set(Array, forKey: "bookmarksArray") // Reset array object
                         }
+                        // userDefaults_bookmarksArray end
                     }) {
-                        Image(self.isBookmarksPage.bookmarksPage ? "bookmark_remove_FILL0_wght400_GRAD0_opsz48" : "bookmark_add_FILL0_wght400_GRAD0_opsz48")
+                        Image(self.isBookmarksPage.BOOL ? "bookmark_remove_FILL0_wght400_GRAD0_opsz48" : "bookmark_add_FILL0_wght400_GRAD0_opsz48")
                             .renderingMode(.template)
                             .foregroundColor(ColorPalette.primaryThemeBlue.theme.accentColor)
                     }
@@ -86,10 +96,10 @@ struct CardView: View {
 }
 
 struct CardViewBookmarks {
-    var bookmarksPage: Bool
+    var BOOL: Bool
     
-    init(bookmarksPage: Bool) {
-        self.bookmarksPage = bookmarksPage
+    init(BOOL: Bool) {
+        self.BOOL = BOOL
     }
 }
 
